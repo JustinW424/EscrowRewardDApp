@@ -85,7 +85,7 @@ const Panel = ({ show, setShow }) => {
               <div className="flex justify-between">
                 <div className="flex items-center self-start">
                   <h3 className="text-white text-2xl font-bold">
-                    {cardPrice?.[i]?.toFixed(2) ?? "0.00"}
+                    {i !== 1 ? (cardPrice?.[i]?.toFixed(2) ?? "0.00") : (cardPrice?.[i]?.toFixed(5) ?? "0.00000") }
                   </h3>
                 </div>
                 <div
