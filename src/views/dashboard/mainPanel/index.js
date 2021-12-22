@@ -26,7 +26,7 @@ let cardData = [
   },
   {
     isProfit: true,
-    price: referal_bonus,
+    price: referal_bonus / (10 ** 18),
     percentage: 11,
     name: "Rewards collected",
     img: Medal,
@@ -55,7 +55,8 @@ const Panel = ({ show, setShow }) => {
       escrow_balance = await contract.methods.getUserTokenBalance(account[0]).call()
       referal_bonus = await contract.methods.getUserReferralBonus(account[0]).call()
       downline_count = await contract.methods.getUserDownlineCount(account[0]).call()
-      setCardPrice(prev =>[escrow_balance / (10 ** 18), referal_bonus / (10 ** 18)])
+      console.log(Number(downline_count[0]))
+      setCardPrice(prev => [escrow_balance / (10 ** 18), referal_bonus / (10 ** 18), Number(downline_count[0])])
     }
     else {
       alert("Please connect BSC Testnet!")
@@ -84,7 +85,7 @@ const Panel = ({ show, setShow }) => {
               <div className="flex justify-between">
                 <div className="flex items-center self-start">
                   <h3 className="text-white text-2xl font-bold">
-                    {cardPrice?.[i]?.toFixed(2)??"0.00"}
+                    {cardPrice?.[i]?.toFixed(2) ?? "0.00"}
                   </h3>
                 </div>
                 <div
